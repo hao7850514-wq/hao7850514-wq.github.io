@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 8 - Layout trang web</title>
+    <!-- Nhúng Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <div class="container my-4">
+        <!-- 1. HEADER (Thanh điều hướng trang chủ) -->
+        <header class="navbar navbar-expand-lg navbar-dark bg-dark px-3 mb-4 rounded">
+            <a class="navbar-brand" href="#">Trang chủ</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#">Giới thiệu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Thành viên</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Đăng ký</a></li>
+                </ul>
+            </div>
+        </header>
+
+        <!-- SỬ DỤNG GRID SYSTEM (BỐ CỤC CHÍNH) -->
+        <div class="row">
+            <!-- CỘT TRÁI (Sidebar & Giới thiệu nhóm) -->
+            <div class="col-lg-4 mb-4">
+                <!-- Phần giới thiệu nhóm -->
+                <div class="card p-3 mb-4 shadow-sm">
+                    <h4>Giới thiệu nhóm</h4>
+                    <p class="text-muted">Hình ảnh nhóm:</p>
+                    <img src="https://via.placeholder.com/300x150" class="img-fluid rounded mb-3" alt="Hình ảnh nhóm">
+                    <p>Đây là mô tả và hình ảnh...</p>
+                </div>
+
+                <!-- Phần các liên kết (Menu phụ) -->
+                <div class="card p-3 shadow-sm">
+                    <h4>Các liên kết</h4>
+                    <div class="list-group list-group-flush mt-2">
+                        <a href="#" class="list-group-item list-group-item-action active">Giảng viên</a>
+                        <a href="#" class="list-group-item list-group-item-action">Sinh viên</a>
+                        <a href="#" class="list-group-item list-group-item-action">Cựu Sinh viên</a>
+                        <a href="#" class="list-group-item list-group-item-action">Khác</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CỘT PHẢI (Danh sách thành viên & Form đăng ký) -->
+            <div class="col-lg-8">
+                <!-- Danh sách thành viên -->
+                <div class="card p-3 mb-4 shadow-sm">
+                    <h3>DANH SÁCH THÀNH VIÊN</h3>
+                    <p class="text-muted">Giới thiệu về nhóm...</p>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Họ</th>
+                                    <th>Tên</th>
+                                    <th>Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Lê Văn</td>
+                                    <td>Thắng</td>
+                                    <td>lvthang@gmail.com</td>
+                                </tr>
+                                <tr>
+                                    <td>Nguyễn Văn</td>
+                                    <td>Hùng</td>
+                                    <td>hung@gmail.com</td>
+                                </tr>
+                                <tr>
+                                    <td>Phạm Thị Thùy</td>
+                                    <td>Dung</td>
+                                    <td>dung@gmail.com</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Form đăng ký thành viên (Có kiểm tra nhập liệu) -->
+                <div class="card p-3 shadow-sm">
+                    <h3>Đăng ký thành viên</h3>
+                    <form id="registerForm" class="needs-validation" novalidate onsubmit="return validateForm(event)">
+                        
+                        <div class="mb-3">
+                            <label for="fullname" class="form-label">Họ và tên</label>
+                            <input type="text" class="form-control" id="fullname" placeholder="Họ và tên không rỗng">
+                            <div class="invalid-feedback" id="error-fullname">Họ và tên không được để trống.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="Nhập địa chỉ mail hợp lệ">
+                            <div class="invalid-feedback" id="error-email">Vui lòng nhập email hợp lệ.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Mật khẩu</label>
+                            <input type="password" class="form-control" id="password" placeholder="Mật khẩu đúng, ví dụ Abc@1234">
+                            <div class="invalid-feedback" id="error-password">Mật khẩu phải có ít nhất 6 ký tự.</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">Nhập lại MK</label>
+                            <input type="password" class="form-control" id="confirmPassword" placeholder="Nhập lại mật khẩu">
+                            <div class="invalid-feedback" id="error-confirmPassword">Mật khẩu nhập lại không khớp.</div>
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="remember">
+                            <label class="form-check-label" for="remember">Ghi nhớ</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-dark">Đăng ký</button>
+                        <button type="reset" class="btn btn-secondary">Hủy</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. FOOTER -->
+        <footer class="bg-dark text-white text-center py-3 mt-4 rounded">
+            Footer
+        </footer>
+    </div>
+
+    <!-- Nhúng Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Script kiểm tra dữ liệu form đơn giản -->
+    <script>
+        function validateForm(event) {
+            let isValid = true;
+
+            const fullname = document.getElementById('fullname');
+            const email = document.getElementById('email');
+            const password = document.getElementById('password');
+            const confirmPassword = document.getElementById('confirmPassword');
+
+            // Kiểm tra họ tên không được rỗng
+            if (fullname.value.trim() === '') {
+                fullname.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                fullname.classList.remove('is-invalid');
+                fullname.classList.add('is-valid');
+            }
+
+            // Kiểm tra email đơn giản
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email.value)) {
+                email.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                email.classList.remove('is-invalid');
+                email.classList.add('is-valid');
+            }
+
+            // Kiểm tra mật khẩu (tối thiểu 6 ký tự)
+            if (password.value.length < 6) {
+                password.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                password.classList.remove('is-invalid');
+                password.classList.add('is-valid');
+            }
+
+            // Kiểm tra mật khẩu nhập lại
+            if (confirmPassword.value !== password.value || confirmPassword.value === '') {
+                confirmPassword.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                confirmPassword.classList.remove('is-invalid');
+                confirmPassword.classList.add('is-valid');
+            }
+
+            if (!isValid) {
+                event.preventDefault(); // Ngăn form gửi đi nếu có lỗi
+            } else {
+                alert('Đăng ký thành công!');
+            }
+
+            return isValid;
+        }
+    </script>
+</body>
+</html>
